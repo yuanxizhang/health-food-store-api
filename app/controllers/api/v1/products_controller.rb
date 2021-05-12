@@ -37,16 +37,18 @@ class Api::V1::ProductsController < ApplicationController
     @product.destroy
   end
 
-  def increase_inventory
+  def increase_inventory(n)
     @product = Product.find_by(id: params[:id])
-    @product.instock += 1
+    @product.instock += n.to_i
     @product.save
   end
   
-  def decrease_inventory
+  def decrease_inventory(n)
     @product = Product.find_by(id: params[:id])
-    if @product.instock > 1
-      @product.instock -= 1
+    if @product.instock > 1 && (@product.instock - n) > 1
+      @product.instock -= n.to_i
+    elsif @product.instock < 1
+      OutOfStockNotifierMailer.notify_admin_user(current_user.id, product.id).deliver_now
     end
     @product.save
   end

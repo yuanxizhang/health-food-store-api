@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
-    include ActiveModel::Dirty
 
-    validates :name, presence: true
-    validates :instock, numericality: { only_integer: true }
-    validates :instock, inclusion: { in: 0..1000 }
+    validates :name,        presence: true, length: { maximum: 165 }
+    validates :description, presence: true, length: { maximum: 2255 }
+    validates :instock,     numericality: { only_integer: true }
+    validates :instock,     inclusion: { in: 0..1000 }
 
     scope :out_of_stock, -> { where('instock < 1') }
 
@@ -14,7 +14,7 @@ class Product < ApplicationRecord
     def check_inventory
         if self.instock < 1
             # Send email to notify product out of stock
-            OutOfStockNotifierMailer.notify_user.deliver
+            OutOfStockNotifierMailer.notify_admin_user(current_user.id, self.id).deliver_now
         end
     end
 end
