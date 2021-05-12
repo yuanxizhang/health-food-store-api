@@ -3,11 +3,11 @@ class Api::V1::ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.all.order(name: :ASC)
     render json: @products
   end
 
-  # GET /todos/:id
+  # GET /products/:id
   def show
     render json: @product
   end
