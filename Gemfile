@@ -16,6 +16,15 @@ gem 'puma', '~> 4.1'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# let us to call to_json or as_json on the ActiveRecord object or collection 
+gem 'active_model_serializers'
+
+# enable Cross-Origin Resource Sharing (CORS)
+gem 'rack-cors'
+
+# To protect our API from DDoS, brute force attacks, hammering
+gem 'rack-attack'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
