@@ -37,6 +37,20 @@ class Api::V1::ProductsController < ApplicationController
     @product.destroy
   end
 
+  def increase_inventory
+    @product = Product.find_by(id: params[:id])
+    @product.instock += 1
+    @product.save
+  end
+  
+  def decrease_inventory
+    @product = Product.find_by(id: params[:id])
+    if @product.instock > 1
+      @product.instock -= 1
+    end
+    @product.save
+  end
+
   private
 
   def product_params
