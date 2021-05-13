@@ -27,6 +27,9 @@ class Api::V1::ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       render json: @product
+      if @product.instock < 1
+        Notifier.out_of_stock_email(@product.id).deliver_now
+      end
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -47,7 +50,7 @@ class Api::V1::ProductsController < ApplicationController
     if @product.instock > 1 && (@product.instock - n.to_i) > 1
       @product.instock -= n.to_i
     elsif @product.instock < 1
-      Notifier.out_of_stock_email(@admin_user_id, @product.id).deliver_now
+      Notifier.out_of_stock_email(@product.id).deliver_now
     end
     @product.save
   end
