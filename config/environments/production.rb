@@ -54,6 +54,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "health_food_store_api_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { :host => "https://health_food_store_api.herokuapp.com" }
 
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail

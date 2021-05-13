@@ -1,9 +1,10 @@
 class Notifier < ApplicationMailer
     default from: 'healthfoodstore99@gmail.com'
 
-    def out_of_stock_mailer(user_id, product_id)
-        @user = User.find_by(id: user_id) 
+    def out_of_stock_email(product_id)
+        @admin_user_emails = User.where(isadmin: true).map(&:email).join(", ")
         @product = Product.find_by(id: product_id)
-        mail(to: @user.email, subject: "Out of stock Notification")
+        
+        mail(to: @admin_user_emails, subject: "Out of stock Notification for {@product.name}")
     end
 end
