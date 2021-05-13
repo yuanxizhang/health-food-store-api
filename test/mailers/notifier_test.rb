@@ -1,5 +1,6 @@
 require 'test_helper'
 
-class OutOfStockNotifierMailerTest < ActionMailer::TestCase
-  
+class NotifierTest < ActionMailer::TestCase
+    require "rails_helper"
+
 end
