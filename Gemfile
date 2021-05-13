@@ -22,9 +22,6 @@ gem 'jwt', '~> 2.2', '>= 2.2.1'
 # let us to call to_json or as_json on the ActiveRecord object or collection 
 gem 'active_model_serializers'
 
-# enable Cross-Origin Resource Sharing (CORS)
-gem 'rack-cors'
-
 # To protect our API from DDoS, brute force attacks, hammering
 gem 'rack-attack'
 
@@ -35,11 +32,12 @@ gem 'rack-attack'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec', '~> 3.5'
 end
 
 group :development do

@@ -32,11 +32,6 @@ class Api::V1::ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/:id
-  def destroy
-    @product.destroy
-  end
-
   def increase_inventory(n)
     @product = Product.find_by(id: params[:id])
     @product.instock += n.to_i
