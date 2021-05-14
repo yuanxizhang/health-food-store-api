@@ -5,6 +5,6 @@ class Notifier < ApplicationMailer
         @admin_user_emails = User.where(isadmin: true).map(&:email).join(", ")
         @product = Product.find_by(id: product_id)
         
-        mail(to: @admin_user_emails, subject: "Out of stock Notification for {@product.name}")
+        mail(to: @admin_user_emails, subject: 'Out of stock Notification for #{@product.name}')
     end
 end
